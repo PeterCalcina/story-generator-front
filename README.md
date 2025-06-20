@@ -103,7 +103,4 @@ src/
   Personaliza Tailwind en `tailwind.config.js` si lo necesitas.
 - **Validaciones**:  
   Los esquemas de Zod están en `src/shared/schemas/`.
-
 ---
-
-¿Dudas o sugerencias? ¡No dudes en abrir un issue o contactarnos!
