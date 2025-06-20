@@ -16,7 +16,7 @@ export function Loader({
     <div className="flex items-center gap-2 justify-center">
       <div
         className={cn(
-          "animate-spin rounded-full border-2 border-current border-t-transparent",
+            "animate-spin rounded-full border-2 border-b-blue-600 border-r-blue-600 border-l-blue-600 border-t-transparent",
           {
             "h-4 w-4": size === "sm",
             "h-6 w-6": size === "md",
@@ -28,7 +28,7 @@ export function Loader({
       >
         <span className="sr-only"></span>
       </div>
-      <span className="text-sm">{message}</span>
+      <span className="text-sm text-gray-500">{message}</span>
     </div>
   );
 }

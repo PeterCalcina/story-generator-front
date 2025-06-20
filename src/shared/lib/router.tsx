@@ -3,7 +3,7 @@ import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom';
 // Pages
 import { LoginPage } from '@/pages/auth/LoginPage';
 import { RegisterPage } from '@/pages/auth/RegisterPage';
-import { StoriesPage } from '@/pages/history/Stories';
+import { StoriesPage } from '@/pages/story/Stories';
 
 // Stores and Layouts
 import { useAuthStore } from '@/stores/authStore';
@@ -42,13 +42,13 @@ export const router = createBrowserRouter([
     element: <ProtectedRoute />,
     children: [
       {
-        path: '/',
+        path: '/historias',
         element: <StoriesPage />,
       },
     ],
   },
   {
     path: '*',
-    element: <Navigate to="/" />,
+    element: <Navigate to="/historias" />,
   },
 ]);

@@ -13,7 +13,8 @@ export const useCreateStory = () => {
       const formData = new FormData();
       formData.append("image", data.image);
       formData.append("description", data.description);
-      return createStory(formData);
+      
+      return await createStory(formData);
     },
 
     onSuccess: ({ message }) => {

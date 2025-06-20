@@ -3,7 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/shared/lib/supabase";
 import { useAuthStore } from "@/stores/authStore";
 import { useToastStore } from "@/stores/toastStore";
-import { Button, Input, Card, Loader } from "@/shared/components/ui";
+import { Button, Input, Card, Loader, Label } from "@/shared/components/ui";
+import { Sparkles } from "lucide-react";
 
 export function LoginPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -14,7 +15,7 @@ export function LoginPage() {
   const { setAuth } = useAuthStore();
   const { addToast } = useToastStore();
 
-  const from = location.state?.from?.pathname || "/dashboard";
+  const from = location.state?.from?.pathname || "/";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,7 +25,6 @@ export function LoginPage() {
       addToast("warning", "Por favor completa todos los campos.");
       return;
     }
-
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
@@ -38,7 +38,10 @@ export function LoginPage() {
       addToast("success", "¡Bienvenido! Has iniciado sesión correctamente.");
       navigate(from, { replace: true });
     } catch (error) {
-      const message = error instanceof Error ? error.message : "Error al iniciar sesión. Verifica tus credenciales.";
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Error al iniciar sesión. Verifica tus credenciales.";
       addToast("error", message);
     } finally {
       setLoading(false);
@@ -46,59 +49,96 @@ export function LoginPage() {
   };
 
   return (
-    <Card.Root className="w-full max-w-md bg-white">
-      <Card.Header>
-        <h2 className="text-2xl font-bold text-center text-dark-blue">Iniciar Sesión</h2>
-      </Card.Header>
-      <form onSubmit={handleSubmit}>
-        <Card.Content className="space-y-4">
-          <div className="space-y-2">
-            <label htmlFor="phoneNumber" className="text-sm font-medium">
-              Número de celular
-            </label>
-            <Input
-              id="phoneNumber"
-              type="text"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              required
-              placeholder="Tu número de celular"
-              aria-invalid={!phoneNumber ? true : false}
-              aria-describedby="phoneNumber-error"
-            />
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8 animate-fade-in">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mb-4 shadow-lg">
+            <Sparkles className="w-8 h-8 text-white" />
           </div>
-          <div className="space-y-2">
-            <label htmlFor="password" className="text-sm font-medium">
-              Contraseña
-            </label>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="••••••••"
-              aria-invalid={!password ? true : false}
-              aria-describedby="password-error"
-            />
-          </div>
-        </Card.Content>
-        <Card.Footer className="flex flex-col gap-4">
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? <Loader size="sm" message="Iniciando sesión..." /> : "Iniciar Sesión"}
-          </Button>
-          <p className="text-sm text-center text-gray-600">
-            ¿No tienes una cuenta?{" "}
-            <Button
-              variant="link"
-              className="p-0"
-              onClick={() => navigate("/register")}
-            >
-              Regístrate
-            </Button>
-          </p>
-        </Card.Footer>
-      </form>
-    </Card.Root>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+            StoryVerse
+          </h1>
+          <p className="text-gray-600 mt-2">Donde las historias cobran vida</p>
+        </div>
+        <Card.Root className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm hover:shadow-3xl transition-all duration-500 animate-slide-up">
+          <Card.Header className="space-y-1 pb-6">
+            <Card.Title className="text-2xl font-bold text-center text-gray-800">
+              Iniciar Sesión
+            </Card.Title>
+            <Card.Description className="text-center text-gray-600">
+              Ingresa a tu mundo de historias
+            </Card.Description>
+          </Card.Header>
+
+          <form onSubmit={handleSubmit}>
+            <Card.Content className="space-y-6">
+              <div className="space-y-2">
+                <Label
+                  htmlFor="phoneNumber"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  Número de celular
+                </Label>
+                <Input
+                  id="phoneNumber"
+                  type="text"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                  placeholder="Tu número de celular"
+                  aria-invalid={!phoneNumber ? true : false}
+                  aria-describedby="phoneNumber-error"
+                  className="h-12 border-gray-200 focus:border-purple-500 focus:ring-purple-500 transition-all duration-300"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label
+                  htmlFor="password"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  Contraseña
+                </Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  placeholder="••••••••"
+                  aria-invalid={!password ? true : false}
+                  aria-describedby="password-error"
+                  className="h-12 pr-12 border-gray-200 focus:border-purple-500 focus:ring-purple-500 transition-all duration-300"
+                />
+              </div>
+            </Card.Content>
+
+            <Card.Footer className="flex flex-col gap-4">
+              <Button
+                type="submit"
+                disabled={loading}
+                className="w-full h-12 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300"
+              >
+                {loading ? (
+                  <Loader size="sm" message="Iniciando sesión..." />
+                ) : (
+                  "Iniciar Sesión"
+                )}
+              </Button>
+
+              <p className="text-sm text-gray-600">
+                ¿No tienes una cuenta?{" "}
+                <Button
+                  variant="link"
+                  className="font-medium text-purple-600 hover:text-purple-700 transition-colors duration-200"
+                  onClick={() => navigate("/register")}
+                >
+                  Regístrate
+                </Button>
+              </p>
+            </Card.Footer>
+          </form>
+        </Card.Root>
+      </div>
+    </div>
   );
 }
