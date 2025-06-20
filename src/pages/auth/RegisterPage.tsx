@@ -11,20 +11,31 @@ import {
   Label,
 } from "@/shared/components/ui";
 import { Phone, Sparkles, Lock, RectangleEllipsis } from "lucide-react";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import {
+  inputPhoneStyle,
+  buttonPhoneStyle,
+  dropdownPhoneStyle,
+} from "./utils/input-phone.style";
 
 export function RegisterPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [openCodeDialog, setOpenCodeDialog] = useState(false);
   const [code, setCode] = useState("");
   const navigate = useNavigate();
   const { addToast } = useToastStore();
 
+  const inputStyle = inputPhoneStyle;
+  const buttonStyle = buttonPhoneStyle;
+  const dropdownStyle = dropdownPhoneStyle;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!password || !confirmPassword || !phone) {
+    if (!password || !confirmPassword || !phoneNumber) {
       addToast("error", "Por favor, completa todos los campos.");
       return;
     }
@@ -38,7 +49,7 @@ export function RegisterPage() {
 
     try {
       const { error } = await supabase.auth.signUp({
-        phone: `+591${phone}`,
+        phone: `${phoneNumber}`,
         password,
       });
 
@@ -46,9 +57,15 @@ export function RegisterPage() {
 
       addToast(
         "success",
-        "¡Cuenta creada exitosamente! Por favor, verifica tu celular."
-      );
-      setOpenCodeDialog(true);
+        "¡Cuenta creada exitosamente! Por favor, inicia sesión."
+      ); // # Quitar este toast cuando se quiera activar el dialogo de verificación
+
+      // addToast(
+      //   "success",
+      //   "¡Cuenta creada exitosamente! Ingresa el código de verificación que te hemos enviado a tu número de celular."
+      // ); # Quitar el comentario de este toast cuando se quiera activar el dialogo de verificación
+      // setOpenCodeDialog(true); # Quitar el comentario de esta linea cuando se quiera activar el dialogo de verificación
+      navigate("/login"); // # Quitar esta linea cuando se quiera activar el dialogo de verificación
     } catch (error) {
       addToast("error", "Error al crear la cuenta. Intenta nuevamente.");
     } finally {
@@ -60,7 +77,7 @@ export function RegisterPage() {
     e.preventDefault();
     try {
       const { error } = await supabase.auth.verifyOtp({
-        phone: `+591${phone}`,
+        phone: `${phoneNumber}`,
         token: code,
         type: "sms",
       });
@@ -112,14 +129,22 @@ export function RegisterPage() {
                 </Label>
                 <div className="relative">
                   <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                  <Input
-                    id="phone"
-                    type="text"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    required
+                  <PhoneInput
+                    inputClass="green-input"
+                    value={phoneNumber}
+                    onChange={(value) => setPhoneNumber(value)}
                     placeholder="Tu número de celular"
-                    className="h-12 pl-10 border-gray-200 focus:border-emerald-500 focus:ring-emerald-500 transition-all duration-300"
+                    containerClass="h-12"
+                    inputProps={{
+                      required: true,
+                      "aria-invalid": !phoneNumber ? true : false,
+                      "aria-describedby": "phoneNumber-error",
+                    }}
+                    inputStyle={inputStyle}
+                    buttonStyle={buttonStyle}
+                    dropdownStyle={dropdownStyle}
+                    country="pe"
+                    regions={["south-america"]}
                   />
                 </div>
               </div>

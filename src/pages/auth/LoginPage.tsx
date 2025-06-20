@@ -5,6 +5,9 @@ import { useAuthStore } from "@/stores/authStore";
 import { useToastStore } from "@/stores/toastStore";
 import { Button, Input, Card, Loader, Label } from "@/shared/components/ui";
 import { Sparkles } from "lucide-react";
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+import { inputPhoneStyle, buttonPhoneStyle, dropdownPhoneStyle } from "./utils/input-phone.style";
 
 export function LoginPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -16,6 +19,9 @@ export function LoginPage() {
   const { addToast } = useToastStore();
 
   const from = location.state?.from?.pathname || "/";
+  const inputStyle = inputPhoneStyle;
+  const buttonStyle = buttonPhoneStyle;
+  const dropdownStyle = dropdownPhoneStyle;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +34,7 @@ export function LoginPage() {
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        phone: `+591${phoneNumber}`,
+        phone: `${phoneNumber}`,
         password,
       });
 
@@ -79,17 +85,23 @@ export function LoginPage() {
                 >
                   Número de celular
                 </Label>
-                <Input
-                  id="phoneNumber"
-                  type="text"
+                <PhoneInput
                   value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  required
+                  onChange={(value) => setPhoneNumber(value)}
                   placeholder="Tu número de celular"
-                  aria-invalid={!phoneNumber ? true : false}
-                  aria-describedby="phoneNumber-error"
-                  className="h-12 border-gray-200 focus:border-purple-500 focus:ring-purple-500 transition-all duration-300"
+                  containerClass="h-12"
+                  inputProps={{
+                    required: true,
+                    "aria-invalid": !phoneNumber ? true : false,
+                    "aria-describedby": "phoneNumber-error",
+                  }}
+                  inputStyle={inputStyle}
+                  buttonStyle={buttonStyle}
+                  dropdownStyle={dropdownStyle}
+                  country="pe"
+                  onlyCountries={["bo", "ar", "cl", "co", "ec", "pe", "uy", "ve"]}
                 />
+
               </div>
               <div className="space-y-2">
                 <Label

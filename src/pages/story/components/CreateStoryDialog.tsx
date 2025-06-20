@@ -152,7 +152,7 @@ export function CreateStoryDialog({
               className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
             >
               {createStory.status === "pending" ? (
-                <Loader size="sm" message="Creando..." />
+                <Loader size="sm" message="Creando..." textColor="white" variant="white"/>
               ) : (
                 "Crear"
               )}

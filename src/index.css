@@ -56,3 +56,41 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-2px); }
 }
+
+/* Phone Input Pseudo Effects Styles */
+.form-control:focus {
+  border: 1px solid #ad46ff  !important;
+  outline: none !important;
+}
+
+.green-input:focus {
+  border: 1px solid #00bc7d  !important;
+  outline: none !important;
+}
+
+.form-control:focus-visible {
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #ad46ff  !important;
+}
+
+.green-input:focus-visible {
+  box-shadow: 0 0 0 2px white, 0 0 0 4px #00bc7d  !important;
+}
+
+
+.selected-flag {
+  transition: transform 0.3s ease !important;
+}
+
+.country-list::-webkit-scrollbar {
+  width: 0.35rem !important;
+  background: transparent !important;
+}
+
+.country-list::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem !important;
+  background: #ad46ff !important;
+}
+
+.country-list::-webkit-scrollbar-track-piece {
+  background: transparent !important;
+}
