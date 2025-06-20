@@ -28,4 +28,3 @@ Thumbs.db
 
 # --- ShadCN ---
 /components.json # archivo generado por shadcn UI CLI
-package-lock.json
