@@ -119,7 +119,12 @@ export function LoginPage() {
                 className="w-full h-12 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300"
               >
                 {loading ? (
-                  <Loader size="sm" message="Iniciando sesión..." />
+                  <Loader
+                    size="sm"
+                    message="Iniciando sesión..."
+                    variant="white"
+                    textColor="white"
+                  />
                 ) : (
                   "Iniciar Sesión"
                 )}

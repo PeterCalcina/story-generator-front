@@ -171,7 +171,12 @@ export function RegisterPage() {
                 className="w-full h-12 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300"
               >
                 {loading ? (
-                  <Loader size="sm" message="Creando cuenta..." />
+                  <Loader
+                    size="sm"
+                    message="Creando cuenta..."
+                    variant="white"
+                    textColor="white"
+                  />
                 ) : (
                   "Crear Cuenta"
                 )}
