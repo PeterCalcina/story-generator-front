@@ -164,20 +164,20 @@ export function CreateStoryDialog({
             </Label>
             <Carousel.Root
               opts={{ align: "start", initial: activeStyleIdx }}
-              className="w-full max-w-md mx-auto justify-center"
+              className="w-64 md:w-full max-w-xs md:max-w-md mx-auto justify-center"
             >
               <Carousel.Content>
                 {styleOptions.map((option, idx) => (
                   <Carousel.Item
                     key={option.name}
-                    className="flex flex-col items-center py-2 basis-1/3"
+                    className="flex flex-col items-center py-2 md:basis-1/3 basis-1/2"
                   >
-                    <div className="relative w-32 h-32 mb-2">
+                    <div className="relative w-24 h-24 md:w-32 md:h-32 mb-2">
                       <img
                         src={option.img}
                         alt={option.name}
                         className={cn(
-                          "w-32 h-34 object-cover rounded-lg border-4 transition-all duration-300 cursor-pointer",
+                          "w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg border-4 transition-all duration-300 cursor-pointer",
                           "hover:scale-105 hover:border-indigo-500 hover:shadow-lg",
                           newStory.style === option.name
                             ? "border-indigo-500 shadow-lg scale-105"
@@ -189,7 +189,7 @@ export function CreateStoryDialog({
                           setActiveStyleIdx(idx);
                         }}
                       />
-                      <div className="absolute -bottom-2 left-0 w-full h-12 rounded-b-lg flex items-end justify-center pointer-events-none">
+                      <div className="absolute bottom-0 left-0 w-full h-12 rounded-b-lg flex items-end justify-center pointer-events-none">
                         <div className="w-full h-full absolute bottom-0 left-0 rounded-b-lg bg-gradient-to-t from-black/80 to-transparent" />
                         <span className="relative z-10 text-white text-base font-semibold capitalize drop-shadow-md pb-1">
                           {option.name}
