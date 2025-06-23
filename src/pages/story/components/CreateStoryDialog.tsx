@@ -11,6 +11,7 @@ import { CreateStorySchema } from "@/shared/schemas/create-story.schema";
 import { ImageIcon } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { Carousel } from "@/shared/components/ui/carousel";
+import { styleImageOptions } from "@/shared/constants/imageStyle";
 
 interface CreateStoryDialogProps {
   open: boolean;
@@ -24,35 +25,10 @@ export function CreateStoryDialog({
   const [newStory, setNewStory] = useState<CreateStorySchema>({
     image: new File([], ""),
     description: "",
-    style: "anime",
+    style: "ANIME",
   });
   const createStory = useCreateStory();
-  const styleOptions = [
-    {
-      name: "anime",
-      img: "images/anime.webp",
-    },
-    {
-      name: "cartoon",
-      img: "images/cartoon.webp",
-    },
-    {
-      name: "manga",
-      img: "images/manga.webp",
-    },
-    {
-      name: "comic",
-      img: "images/comic.webp",
-    },
-    {
-      name: "realista",
-      img: "images/realista.webp",
-    },
-    {
-      name: "pintura",
-      img: "images/pintura.webp",
-    },
-  ];
+  const styleOptions = styleImageOptions;
   const [activeStyleIdx, setActiveStyleIdx] = useState(0);
 
   const handleChange = (
@@ -80,7 +56,7 @@ export function CreateStoryDialog({
     setNewStory({
       image: new File([], ""),
       description: "",
-      style: "anime",
+      style: "ANIME",
     });
   };
 
