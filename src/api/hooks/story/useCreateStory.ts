@@ -13,7 +13,7 @@ export const useCreateStory = () => {
       const formData = new FormData();
       formData.append("image", data.image);
       formData.append("description", data.description);
-      
+      formData.append("style", data.style);
       return await createStory(formData);
     },
 

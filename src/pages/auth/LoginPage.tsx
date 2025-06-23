@@ -10,7 +10,7 @@ import 'react-phone-input-2/lib/style.css'
 import { inputPhoneStyle, buttonPhoneStyle, dropdownPhoneStyle } from "./utils/input-phone.style";
 
 export function LoginPage() {
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("59199999999");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -98,7 +98,7 @@ export function LoginPage() {
                   inputStyle={inputStyle}
                   buttonStyle={buttonStyle}
                   dropdownStyle={dropdownStyle}
-                  country="pe"
+                  country="bo"
                   onlyCountries={["bo", "ar", "cl", "co", "ec", "pe", "uy", "ve"]}
                 />
 

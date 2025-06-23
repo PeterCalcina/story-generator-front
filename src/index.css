@@ -81,16 +81,16 @@
   transition: transform 0.3s ease !important;
 }
 
-.country-list::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0.35rem !important;
   background: transparent !important;
 }
 
-.country-list::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   border-radius: 0.5rem !important;
   background: #ad46ff !important;
 }
 
-.country-list::-webkit-scrollbar-track-piece {
+::-webkit-scrollbar-track-piece {
   background: transparent !important;
 }
